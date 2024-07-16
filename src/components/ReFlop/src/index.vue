@@ -1,3 +1,16 @@
+<template>
+  <div class="flip-clock">
+    <flippers ref="flipperHour1" />
+    <flippers ref="flipperHour2" />
+    <em>:</em>
+    <flippers ref="flipperMinute1" />
+    <flippers ref="flipperMinute2" />
+    <em>:</em>
+    <flippers ref="flipperSecond1" />
+    <flippers ref="flipperSecond2" />
+  </div>
+</template>
+
 <script setup lang="ts">
 import flippers from "./filpper";
 import { ref, unref, nextTick, onUnmounted } from "vue";
@@ -106,19 +119,6 @@ onUnmounted(() => {
   }
 });
 </script>
-
-<template>
-  <div class="flip-clock">
-    <flippers ref="flipperHour1" />
-    <flippers ref="flipperHour2" />
-    <em>:</em>
-    <flippers ref="flipperMinute1" />
-    <flippers ref="flipperMinute2" />
-    <em>:</em>
-    <flippers ref="flipperSecond1" />
-    <flippers ref="flipperSecond2" />
-  </div>
-</template>
 
 <style>
 .flip-clock .m-flipper {

@@ -1,49 +1,3 @@
-<script setup lang="ts">
-import { useI18n } from "vue-i18n";
-import { ref, reactive } from "vue";
-import Motion from "../utils/motion";
-import { message } from "@/utils/message";
-import { phoneRules } from "../utils/rule";
-import type { FormInstance } from "element-plus";
-import { $t, transformI18n } from "@/plugins/i18n";
-import { useVerifyCode } from "../utils/verifyCode";
-import { useUserStoreHook } from "@/store/modules/user";
-import { useRenderIcon } from "@/components/ReIcon/src/hooks";
-import Iphone from "@iconify-icons/ep/iphone";
-
-const { t } = useI18n();
-const loading = ref(false);
-const ruleForm = reactive({
-  phone: "",
-  verifyCode: ""
-});
-const ruleFormRef = ref<FormInstance>();
-const { isDisabled, text } = useVerifyCode();
-
-const onLogin = async (formEl: FormInstance | undefined) => {
-  loading.value = true;
-  if (!formEl) return;
-  await formEl.validate(valid => {
-    if (valid) {
-      // 模拟登录请求，需根据实际开发进行修改
-      setTimeout(() => {
-        message(transformI18n($t("login.pureLoginSuccess")), {
-          type: "success"
-        });
-        loading.value = false;
-      }, 2000);
-    } else {
-      loading.value = false;
-    }
-  });
-};
-
-function onBack() {
-  useVerifyCode().end();
-  useUserStoreHook().SET_CURRENTPAGE(0);
-}
-</script>
-
 <template>
   <el-form ref="ruleFormRef" :model="ruleForm" :rules="phoneRules" size="large">
     <Motion>
@@ -104,3 +58,49 @@ function onBack() {
     </Motion>
   </el-form>
 </template>
+
+<script setup lang="ts">
+import { useI18n } from "vue-i18n";
+import { ref, reactive } from "vue";
+import Motion from "../utils/motion";
+import { message } from "@/utils/message";
+import { phoneRules } from "../utils/rule";
+import type { FormInstance } from "element-plus";
+import { $t, transformI18n } from "@/plugins/i18n";
+import { useVerifyCode } from "../utils/verifyCode";
+import { useUserStoreHook } from "@/store/modules/user";
+import { useRenderIcon } from "@/components/ReIcon/src/hooks";
+import Iphone from "@iconify-icons/ep/iphone";
+
+const { t } = useI18n();
+const loading = ref(false);
+const ruleForm = reactive({
+  phone: "",
+  verifyCode: ""
+});
+const ruleFormRef = ref<FormInstance>();
+const { isDisabled, text } = useVerifyCode();
+
+const onLogin = async (formEl: FormInstance | undefined) => {
+  loading.value = true;
+  if (!formEl) return;
+  await formEl.validate(valid => {
+    if (valid) {
+      // 模拟登录请求，需根据实际开发进行修改
+      setTimeout(() => {
+        message(transformI18n($t("login.pureLoginSuccess")), {
+          type: "success"
+        });
+        loading.value = false;
+      }, 2000);
+    } else {
+      loading.value = false;
+    }
+  });
+};
+
+function onBack() {
+  useVerifyCode().end();
+  useUserStoreHook().SET_CURRENTPAGE(0);
+}
+</script>
