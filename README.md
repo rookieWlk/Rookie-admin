@@ -4,11 +4,15 @@
 
 框架使用了最新的 `Vue3`、`Vite`、`Element-Plus`、`TypeScript`、`Pinia`、`Tailwindcss` 等主流技术开发
 
+### 参考文档
+
+- `Element-Plus`：[https://element-plus.org/zh-CN/](https://element-plus.org/zh-CN/)
+
+- `Tailwindcss`：[https://www.tailwindcss.cn/](https://www.tailwindcss.cn/)
+
 ### 安装依赖
 
 ```bash
-cd vue-pure-admin
-
 pnpm install
 ```
 
@@ -24,35 +28,7 @@ pnpm dev
 pnpm build
 ```
 
-## Docker 支持
-
-1. 自定义镜像名为 `vue-pure-admin` 的镜像（请注意下面命令末尾有一个点 `.` 表示使用当前路径下的 `Dockerfile` 文件，可根据实际情况指定路径）
-
-```bash
-docker build -t vue-pure-admin .
-```
-
-2. 端口映射并启动 `docker` 容器（`8080:80`：表示在容器中使用 `80` 端口，并将该端口转发到主机的 `8080` 端口；`pure-admin`：表示自定义容器名；`vue-pure-admin`：表示自定义镜像名）
-
-```bash
-docker run -dp 8080:80  --name pure-admin vue-pure-admin
-```
-
-操作完上面两个命令后，在浏览器打开 `http://localhost:8080` 即可预览
-
-当然也可以通过 [Docker Desktop](https://www.docker.com/products/docker-desktop/) 可视化界面去操作 `docker` 项目，如下图
-
-<p align="center">
-  <img alt="docker-desktop" width="100%" src="https://xiaoxian521.github.io/hyperlink/img/docker-desktop.jpg">
-</p>
-
-## 更新日志
-
-[CHANGELOG](./CHANGELOG.zh_CN.md)
-
 ## `Git` 贡献提交规范
-
-参考 [vue](https://github.com/vuejs/vue/blob/dev/.github/COMMIT_CONVENTION.md) 规范 ([Angular](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular))
 
 - `feat` 增加新功能
 - `fix` 修复问题/BUG
