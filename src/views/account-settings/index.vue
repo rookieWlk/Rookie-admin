@@ -1,3 +1,66 @@
+<template>
+  <el-container class="h-full">
+    <el-aside
+      v-if="isOpen"
+      class="pure-account-settings overflow-hidden px-2 dark:!bg-[var(--el-bg-color)] border-r-[1px] border-[var(--pure-border-color)]"
+      :width="deviceDetection() ? '180px' : '240px'"
+    >
+      <el-menu :default-active="witchPane" class="pure-account-settings-menu">
+        <el-menu-item
+          class="hover:!transition-all hover:!duration-200 hover:!text-base !h-[50px]"
+          @click="router.go(-1)"
+        >
+          <div class="flex items-center">
+            <IconifyIconOffline :icon="leftLine" />
+            <span class="ml-2">返回</span>
+          </div>
+        </el-menu-item>
+        <div class="flex items-center ml-8 mt-4 mb-4">
+          <el-avatar :size="48" :src="userInfo.avatar" />
+          <div class="ml-4 flex flex-col max-w-[130px]">
+            <ReText class="font-bold !self-baseline">
+              {{ userInfo.nickname }}
+            </ReText>
+            <ReText class="!self-baseline" type="info">
+              {{ userInfo.username }}
+            </ReText>
+          </div>
+        </div>
+        <el-menu-item
+          v-for="item in panes"
+          :key="item.key"
+          :index="item.key"
+          @click="
+            () => {
+              witchPane = item.key;
+              if (deviceDetection()) {
+                isOpen = !isOpen;
+              }
+            }
+          "
+        >
+          <div class="flex items-center z-10">
+            <el-icon><IconifyIconOffline :icon="item.icon" /></el-icon>
+            <span>{{ item.label }}</span>
+          </div>
+        </el-menu-item>
+      </el-menu>
+    </el-aside>
+    <el-main>
+      <LaySidebarTopCollapse
+        v-if="deviceDetection()"
+        class="px-0"
+        :is-active="isOpen"
+        @toggleClick="isOpen = !isOpen"
+      />
+      <component
+        :is="panes.find(item => item.key === witchPane).component"
+        :class="[!deviceDetection() && 'ml-[120px]']"
+      />
+    </el-main>
+  </el-container>
+</template>
+
 <script setup lang="ts">
 import { getMine } from "@/api/user";
 import { useRouter } from "vue-router";
@@ -65,69 +128,6 @@ getMine().then(res => {
   userInfo.value = res.data;
 });
 </script>
-
-<template>
-  <el-container class="h-full">
-    <el-aside
-      v-if="isOpen"
-      class="pure-account-settings overflow-hidden px-2 dark:!bg-[var(--el-bg-color)] border-r-[1px] border-[var(--pure-border-color)]"
-      :width="deviceDetection() ? '180px' : '240px'"
-    >
-      <el-menu :default-active="witchPane" class="pure-account-settings-menu">
-        <el-menu-item
-          class="hover:!transition-all hover:!duration-200 hover:!text-base !h-[50px]"
-          @click="router.go(-1)"
-        >
-          <div class="flex items-center">
-            <IconifyIconOffline :icon="leftLine" />
-            <span class="ml-2">返回</span>
-          </div>
-        </el-menu-item>
-        <div class="flex items-center ml-8 mt-4 mb-4">
-          <el-avatar :size="48" :src="userInfo.avatar" />
-          <div class="ml-4 flex flex-col max-w-[130px]">
-            <ReText class="font-bold !self-baseline">
-              {{ userInfo.nickname }}
-            </ReText>
-            <ReText class="!self-baseline" type="info">
-              {{ userInfo.username }}
-            </ReText>
-          </div>
-        </div>
-        <el-menu-item
-          v-for="item in panes"
-          :key="item.key"
-          :index="item.key"
-          @click="
-            () => {
-              witchPane = item.key;
-              if (deviceDetection()) {
-                isOpen = !isOpen;
-              }
-            }
-          "
-        >
-          <div class="flex items-center z-10">
-            <el-icon><IconifyIconOffline :icon="item.icon" /></el-icon>
-            <span>{{ item.label }}</span>
-          </div>
-        </el-menu-item>
-      </el-menu>
-    </el-aside>
-    <el-main>
-      <LaySidebarTopCollapse
-        v-if="deviceDetection()"
-        class="px-0"
-        :is-active="isOpen"
-        @toggleClick="isOpen = !isOpen"
-      />
-      <component
-        :is="panes.find(item => item.key === witchPane).component"
-        :class="[!deviceDetection() && 'ml-[120px]']"
-      />
-    </el-main>
-  </el-container>
-</template>
 
 <style lang="scss">
 .pure-account-settings {

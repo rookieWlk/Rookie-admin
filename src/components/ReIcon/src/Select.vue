@@ -1,3 +1,97 @@
+<template>
+  <div class="selector">
+    <el-input v-model="inputValue" disabled>
+      <template #append>
+        <el-popover
+          :width="350"
+          trigger="click"
+          popper-class="pure-popper"
+          :popper-options="{
+            placement: 'auto'
+          }"
+          @before-enter="onBeforeEnter"
+          @after-leave="onAfterLeave"
+        >
+          <template #reference>
+            <div
+              class="w-[40px] h-[32px] cursor-pointer flex justify-center items-center"
+            >
+              <IconifyIconOffline v-if="!icon" :icon="Search" />
+              <IconifyIconOnline v-else :icon="inputValue" />
+            </div>
+          </template>
+
+          <el-input
+            v-model="filterValue"
+            class="px-2 pt-2"
+            placeholder="搜索图标"
+            clearable
+          />
+
+          <el-tabs v-model="currentActiveType" @tab-click="handleClick">
+            <el-tab-pane
+              v-for="(pane, index) in tabsList"
+              :key="index"
+              :label="pane.label"
+              :name="pane.name"
+            >
+              <el-scrollbar height="220px">
+                <ul class="flex flex-wrap px-2 ml-2">
+                  <li
+                    v-for="(item, key) in pageList"
+                    :key="key"
+                    :title="item"
+                    class="icon-item p-2 cursor-pointer mr-2 mt-1 flex justify-center items-center border border-[#e5e7eb]"
+                    :style="iconItemStyle(item)"
+                    @click="onChangeIcon(item)"
+                  >
+                    <IconifyIconOnline
+                      :icon="currentActiveType + item"
+                      width="20px"
+                      height="20px"
+                    />
+                  </li>
+                </ul>
+                <el-empty
+                  v-show="pageList.length === 0"
+                  :description="`${filterValue} 图标不存在`"
+                  :image-size="60"
+                />
+              </el-scrollbar>
+            </el-tab-pane>
+          </el-tabs>
+
+          <div
+            class="w-full h-9 flex items-center overflow-auto border-t border-[#e5e7eb]"
+          >
+            <el-pagination
+              class="flex-auto ml-2"
+              :total="totalPage"
+              :current-page="currentPage"
+              :page-size="pageSize"
+              :pager-count="5"
+              layout="pager"
+              background
+              small
+              @current-change="onCurrentChange"
+            />
+            <el-button
+              class="justify-end mr-2 ml-2"
+              type="danger"
+              size="small"
+              text
+              bg
+              @click="onClear"
+            >
+              清空
+            </el-button>
+          </div>
+        </el-popover>
+      </template>
+    </el-input>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { IconJson } from "@/components/ReIcon/data";
 import { cloneDeep, isAllEmpty } from "@pureadmin/utils";
@@ -119,100 +213,6 @@ watch(
   () => (currentPage.value = 1)
 );
 </script>
-
-<template>
-  <div class="selector">
-    <el-input v-model="inputValue" disabled>
-      <template #append>
-        <el-popover
-          :width="350"
-          trigger="click"
-          popper-class="pure-popper"
-          :popper-options="{
-            placement: 'auto'
-          }"
-          @before-enter="onBeforeEnter"
-          @after-leave="onAfterLeave"
-        >
-          <template #reference>
-            <div
-              class="w-[40px] h-[32px] cursor-pointer flex justify-center items-center"
-            >
-              <IconifyIconOffline v-if="!icon" :icon="Search" />
-              <IconifyIconOnline v-else :icon="inputValue" />
-            </div>
-          </template>
-
-          <el-input
-            v-model="filterValue"
-            class="px-2 pt-2"
-            placeholder="搜索图标"
-            clearable
-          />
-
-          <el-tabs v-model="currentActiveType" @tab-click="handleClick">
-            <el-tab-pane
-              v-for="(pane, index) in tabsList"
-              :key="index"
-              :label="pane.label"
-              :name="pane.name"
-            >
-              <el-scrollbar height="220px">
-                <ul class="flex flex-wrap px-2 ml-2">
-                  <li
-                    v-for="(item, key) in pageList"
-                    :key="key"
-                    :title="item"
-                    class="icon-item p-2 cursor-pointer mr-2 mt-1 flex justify-center items-center border border-[#e5e7eb]"
-                    :style="iconItemStyle(item)"
-                    @click="onChangeIcon(item)"
-                  >
-                    <IconifyIconOnline
-                      :icon="currentActiveType + item"
-                      width="20px"
-                      height="20px"
-                    />
-                  </li>
-                </ul>
-                <el-empty
-                  v-show="pageList.length === 0"
-                  :description="`${filterValue} 图标不存在`"
-                  :image-size="60"
-                />
-              </el-scrollbar>
-            </el-tab-pane>
-          </el-tabs>
-
-          <div
-            class="w-full h-9 flex items-center overflow-auto border-t border-[#e5e7eb]"
-          >
-            <el-pagination
-              class="flex-auto ml-2"
-              :total="totalPage"
-              :current-page="currentPage"
-              :page-size="pageSize"
-              :pager-count="5"
-              layout="pager"
-              background
-              small
-              @current-change="onCurrentChange"
-            />
-            <el-button
-              class="justify-end mr-2 ml-2"
-              type="danger"
-              size="small"
-              text
-              bg
-              @click="onClear"
-            >
-              清空
-            </el-button>
-          </div>
-        </el-popover>
-      </template>
-    </el-input>
-  </div>
-</template>
 
 <style lang="scss" scoped>
 .icon-item {

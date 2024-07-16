@@ -1,121 +1,3 @@
-<script setup lang="ts">
-import { useI18n } from "vue-i18n";
-import Motion from "./utils/motion";
-import { useRouter } from "vue-router";
-import { message } from "@/utils/message";
-import { loginRules } from "./utils/rule";
-import TypeIt from "@/components/ReTypeit";
-import { debounce } from "@pureadmin/utils";
-import { useNav } from "@/layout/hooks/useNav";
-import { useEventListener } from "@vueuse/core";
-import type { FormInstance } from "element-plus";
-import { $t, transformI18n } from "@/plugins/i18n";
-import { operates, thirdParty } from "./utils/enums";
-import { useLayout } from "@/layout/hooks/useLayout";
-import LoginPhone from "./components/LoginPhone.vue";
-import LoginRegist from "./components/LoginRegist.vue";
-import LoginUpdate from "./components/LoginUpdate.vue";
-import LoginQrCode from "./components/LoginQrCode.vue";
-import { useUserStoreHook } from "@/store/modules/user";
-import { initRouter, getTopMenu } from "@/router/utils";
-import { bg, avatar, illustration } from "./utils/static";
-import { ReImageVerify } from "@/components/ReImageVerify";
-import { ref, toRaw, reactive, watch, computed } from "vue";
-import { useRenderIcon } from "@/components/ReIcon/src/hooks";
-import { useTranslationLang } from "@/layout/hooks/useTranslationLang";
-import { useDataThemeChange } from "@/layout/hooks/useDataThemeChange";
-
-import dayIcon from "@/assets/svg/day.svg?component";
-import darkIcon from "@/assets/svg/dark.svg?component";
-import globalization from "@/assets/svg/globalization.svg?component";
-import Lock from "@iconify-icons/ri/lock-fill";
-import Check from "@iconify-icons/ep/check";
-import User from "@iconify-icons/ri/user-3-fill";
-import Info from "@iconify-icons/ri/information-line";
-
-defineOptions({
-  name: "Login"
-});
-
-const imgCode = ref("");
-const loginDay = ref(7);
-const router = useRouter();
-const loading = ref(false);
-const checked = ref(false);
-const disabled = ref(false);
-const ruleFormRef = ref<FormInstance>();
-const currentPage = computed(() => {
-  return useUserStoreHook().currentPage;
-});
-
-const { t } = useI18n();
-const { initStorage } = useLayout();
-initStorage();
-const { dataTheme, overallStyle, dataThemeChange } = useDataThemeChange();
-dataThemeChange(overallStyle.value);
-const { title, getDropdownItemStyle, getDropdownItemClass } = useNav();
-const { locale, translationCh, translationEn } = useTranslationLang();
-
-const ruleForm = reactive({
-  username: "admin",
-  password: "admin123",
-  verifyCode: ""
-});
-
-const onLogin = async (formEl: FormInstance | undefined) => {
-  if (!formEl) return;
-  await formEl.validate(valid => {
-    if (valid) {
-      loading.value = true;
-      useUserStoreHook()
-        .loginByUsername({ username: ruleForm.username, password: "admin123" })
-        .then(res => {
-          if (res.success) {
-            // 获取后端路由
-            return initRouter().then(() => {
-              disabled.value = true;
-              router
-                .push(getTopMenu(true).path)
-                .then(() => {
-                  message(t("login.pureLoginSuccess"), { type: "success" });
-                })
-                .finally(() => (disabled.value = false));
-            });
-          } else {
-            message(t("login.pureLoginFail"), { type: "error" });
-          }
-        })
-        .finally(() => (loading.value = false));
-    }
-  });
-};
-
-const immediateDebounce: any = debounce(
-  formRef => onLogin(formRef),
-  1000,
-  true
-);
-
-useEventListener(document, "keypress", ({ code }) => {
-  if (
-    ["Enter", "NumpadEnter"].includes(code) &&
-    !disabled.value &&
-    !loading.value
-  )
-    immediateDebounce(ruleFormRef.value);
-});
-
-watch(imgCode, value => {
-  useUserStoreHook().SET_VERIFYCODE(value);
-});
-watch(checked, bool => {
-  useUserStoreHook().SET_ISREMEMBERED(bool);
-});
-watch(loginDay, value => {
-  useUserStoreHook().SET_LOGINDAY(value);
-});
-</script>
-
 <template>
   <div class="select-none">
     <img :src="bg" class="wave" />
@@ -344,6 +226,124 @@ watch(loginDay, value => {
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { useI18n } from "vue-i18n";
+import Motion from "./utils/motion";
+import { useRouter } from "vue-router";
+import { message } from "@/utils/message";
+import { loginRules } from "./utils/rule";
+import TypeIt from "@/components/ReTypeit";
+import { debounce } from "@pureadmin/utils";
+import { useNav } from "@/layout/hooks/useNav";
+import { useEventListener } from "@vueuse/core";
+import type { FormInstance } from "element-plus";
+import { $t, transformI18n } from "@/plugins/i18n";
+import { operates, thirdParty } from "./utils/enums";
+import { useLayout } from "@/layout/hooks/useLayout";
+import LoginPhone from "./components/LoginPhone.vue";
+import LoginRegist from "./components/LoginRegist.vue";
+import LoginUpdate from "./components/LoginUpdate.vue";
+import LoginQrCode from "./components/LoginQrCode.vue";
+import { useUserStoreHook } from "@/store/modules/user";
+import { initRouter, getTopMenu } from "@/router/utils";
+import { bg, avatar, illustration } from "./utils/static";
+import { ReImageVerify } from "@/components/ReImageVerify";
+import { ref, toRaw, reactive, watch, computed } from "vue";
+import { useRenderIcon } from "@/components/ReIcon/src/hooks";
+import { useTranslationLang } from "@/layout/hooks/useTranslationLang";
+import { useDataThemeChange } from "@/layout/hooks/useDataThemeChange";
+
+import dayIcon from "@/assets/svg/day.svg?component";
+import darkIcon from "@/assets/svg/dark.svg?component";
+import globalization from "@/assets/svg/globalization.svg?component";
+import Lock from "@iconify-icons/ri/lock-fill";
+import Check from "@iconify-icons/ep/check";
+import User from "@iconify-icons/ri/user-3-fill";
+import Info from "@iconify-icons/ri/information-line";
+
+defineOptions({
+  name: "Login"
+});
+
+const imgCode = ref("");
+const loginDay = ref(7);
+const router = useRouter();
+const loading = ref(false);
+const checked = ref(false);
+const disabled = ref(false);
+const ruleFormRef = ref<FormInstance>();
+const currentPage = computed(() => {
+  return useUserStoreHook().currentPage;
+});
+
+const { t } = useI18n();
+const { initStorage } = useLayout();
+initStorage();
+const { dataTheme, overallStyle, dataThemeChange } = useDataThemeChange();
+dataThemeChange(overallStyle.value);
+const { title, getDropdownItemStyle, getDropdownItemClass } = useNav();
+const { locale, translationCh, translationEn } = useTranslationLang();
+
+const ruleForm = reactive({
+  username: "admin",
+  password: "admin123",
+  verifyCode: ""
+});
+
+const onLogin = async (formEl: FormInstance | undefined) => {
+  if (!formEl) return;
+  await formEl.validate(valid => {
+    if (valid) {
+      loading.value = true;
+      useUserStoreHook()
+        .loginByUsername({ username: ruleForm.username, password: "admin123" })
+        .then(res => {
+          if (res.success) {
+            // 获取后端路由
+            return initRouter().then(() => {
+              disabled.value = true;
+              router
+                .push(getTopMenu(true).path)
+                .then(() => {
+                  message(t("login.pureLoginSuccess"), { type: "success" });
+                })
+                .finally(() => (disabled.value = false));
+            });
+          } else {
+            message(t("login.pureLoginFail"), { type: "error" });
+          }
+        })
+        .finally(() => (loading.value = false));
+    }
+  });
+};
+
+const immediateDebounce: any = debounce(
+  formRef => onLogin(formRef),
+  1000,
+  true
+);
+
+useEventListener(document, "keypress", ({ code }) => {
+  if (
+    ["Enter", "NumpadEnter"].includes(code) &&
+    !disabled.value &&
+    !loading.value
+  )
+    immediateDebounce(ruleFormRef.value);
+});
+
+watch(imgCode, value => {
+  useUserStoreHook().SET_VERIFYCODE(value);
+});
+watch(checked, bool => {
+  useUserStoreHook().SET_ISREMEMBERED(bool);
+});
+watch(loginDay, value => {
+  useUserStoreHook().SET_LOGINDAY(value);
+});
+</script>
 
 <style scoped>
 @import url("@/style/login.css");

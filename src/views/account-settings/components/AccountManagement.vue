@@ -1,3 +1,26 @@
+<template>
+  <div
+    :class="[
+      'min-w-[180px]',
+      deviceDetection() ? 'max-w-[100%]' : 'max-w-[70%]'
+    ]"
+  >
+    <h3 class="my-8">账户管理</h3>
+    <div v-for="(item, index) in list" :key="index">
+      <div class="flex items-center">
+        <div class="flex-1">
+          <p>{{ item.title }}</p>
+          <el-text class="mx-1" type="info">{{ item.illustrate }}</el-text>
+        </div>
+        <el-button type="primary" text @click="onClick(item)">
+          {{ item.button }}
+        </el-button>
+      </div>
+      <el-divider />
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { ref } from "vue";
 import { message } from "@/utils/message";
@@ -35,29 +58,6 @@ function onClick(item) {
   message("请根据具体业务自行实现", { type: "success" });
 }
 </script>
-
-<template>
-  <div
-    :class="[
-      'min-w-[180px]',
-      deviceDetection() ? 'max-w-[100%]' : 'max-w-[70%]'
-    ]"
-  >
-    <h3 class="my-8">账户管理</h3>
-    <div v-for="(item, index) in list" :key="index">
-      <div class="flex items-center">
-        <div class="flex-1">
-          <p>{{ item.title }}</p>
-          <el-text class="mx-1" type="info">{{ item.illustrate }}</el-text>
-        </div>
-        <el-button type="primary" text @click="onClick(item)">
-          {{ item.button }}
-        </el-button>
-      </div>
-      <el-divider />
-    </div>
-  </div>
-</template>
 
 <style lang="scss" scoped>
 .el-divider--horizontal {
