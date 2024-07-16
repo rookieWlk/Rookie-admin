@@ -1,12 +1,3 @@
-<script setup lang="ts">
-import { useI18n } from "vue-i18n";
-import Motion from "../utils/motion";
-import ReQrcode from "@/components/ReQrcode";
-import { useUserStoreHook } from "@/store/modules/user";
-
-const { t } = useI18n();
-</script>
-
 <template>
   <Motion class="-mt-2 -mb-2">
     <ReQrcode :text="t('login.pureTest')" />
@@ -25,3 +16,12 @@ const { t } = useI18n();
     </el-button>
   </Motion>
 </template>
+
+<script setup lang="ts">
+import { useI18n } from "vue-i18n";
+import Motion from "../utils/motion";
+import ReQrcode from "@/components/ReQrcode";
+import { useUserStoreHook } from "@/store/modules/user";
+
+const { t } = useI18n();
+</script>

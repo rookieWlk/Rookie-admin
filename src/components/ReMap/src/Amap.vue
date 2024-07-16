@@ -1,3 +1,7 @@
+<template>
+  <div id="mapview" ref="mapview" v-loading="mapSet.loading" />
+</template>
+
 <script setup lang="ts">
 import { reactive, getCurrentInstance, onBeforeMount, onUnmounted } from "vue";
 import { deviceDetection } from "@pureadmin/utils";
@@ -120,10 +124,6 @@ onUnmounted(() => {
   }
 });
 </script>
-
-<template>
-  <div id="mapview" ref="mapview" v-loading="mapSet.loading" />
-</template>
 
 <style lang="scss" scoped>
 #mapview {
