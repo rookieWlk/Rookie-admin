@@ -7,8 +7,7 @@ import boxen, { type Options as BoxenOptions } from "boxen";
 dayjs.extend(duration);
 
 const welcomeMessage = gradientString("cyan", "magenta").multiline(
-  `您好! 欢迎使用科淮科技项目`
-  // `您好! 欢迎使用 pure-admin 开源项目\n我们为您精心准备了下面两个贴心的保姆级文档\nhttps://pure-admin.github.io/pure-admin-doc\nhttps://pure-admin-utils.netlify.app`
+  `江苏科淮一枚前端切图仔启动项目中......`
 );
 
 const boxenOptions: BoxenOptions = {
