@@ -37,6 +37,9 @@ export const getPlatformConfig = async (app: App): Promise<undefined> => {
       let $config = app.config.globalProperties.$config;
       // 自动注入系统配置
       if (app && $config && typeof config === "object") {
+        // 修改 Title 字段
+        // TODO 动态修改Title
+        // config.Title = "新的标题";
         $config = Object.assign($config, config);
         app.config.globalProperties.$config = $config;
         // 设置全局配置
