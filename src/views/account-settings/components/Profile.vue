@@ -1,3 +1,90 @@
+<template>
+  <div
+    :class="[
+      'min-w-[180px]',
+      deviceDetection() ? 'max-w-[100%]' : 'max-w-[70%]'
+    ]"
+  >
+    <h3 class="my-8">个人信息</h3>
+    <el-form
+      ref="userInfoFormRef"
+      label-position="top"
+      :rules="rules"
+      :model="userInfos"
+    >
+      <el-form-item label="头像">
+        <el-avatar :size="80" :src="userInfos.avatar" />
+        <el-upload
+          ref="uploadRef"
+          accept="image/*"
+          action="#"
+          :limit="1"
+          :auto-upload="false"
+          :show-file-list="false"
+          :on-change="onChange"
+        >
+          <el-button plain class="ml-4">
+            <IconifyIconOffline :icon="uploadLine" />
+            <span class="ml-2">更新头像</span>
+          </el-button>
+        </el-upload>
+      </el-form-item>
+      <el-form-item label="昵称" prop="nickname">
+        <el-input v-model="userInfos.nickname" placeholder="请输入昵称" />
+      </el-form-item>
+      <el-form-item label="邮箱" prop="email">
+        <el-autocomplete
+          v-model="userInfos.email"
+          :fetch-suggestions="queryEmail"
+          :trigger-on-focus="false"
+          placeholder="请输入邮箱"
+          clearable
+          class="w-full"
+        />
+      </el-form-item>
+      <el-form-item label="联系电话">
+        <el-input
+          v-model="userInfos.phone"
+          placeholder="请输入联系电话"
+          clearable
+        />
+      </el-form-item>
+      <el-form-item label="简介">
+        <el-input
+          v-model="userInfos.description"
+          placeholder="请输入简介"
+          type="textarea"
+          :autosize="{ minRows: 6, maxRows: 8 }"
+          maxlength="56"
+          show-word-limit
+        />
+      </el-form-item>
+      <el-button type="primary" @click="onSubmit(userInfoFormRef)">
+        更新信息
+      </el-button>
+    </el-form>
+    <el-dialog
+      v-model="isShow"
+      width="40%"
+      title="编辑头像"
+      destroy-on-close
+      :closeOnClickModal="false"
+      :before-close="handleClose"
+      :fullscreen="deviceDetection()"
+    >
+      <ReCropperPreview ref="cropRef" :imgSrc="imgSrc" @cropper="onCropper" />
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button bg text @click="handleClose">取消</el-button>
+          <el-button bg text type="primary" @click="handleSubmitImage">
+            确定
+          </el-button>
+        </div>
+      </template>
+    </el-dialog>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { reactive, ref } from "vue";
 import { formUpload } from "@/api/mock";
@@ -102,90 +189,3 @@ getMine().then(res => {
   Object.assign(userInfos, res.data);
 });
 </script>
-
-<template>
-  <div
-    :class="[
-      'min-w-[180px]',
-      deviceDetection() ? 'max-w-[100%]' : 'max-w-[70%]'
-    ]"
-  >
-    <h3 class="my-8">个人信息</h3>
-    <el-form
-      ref="userInfoFormRef"
-      label-position="top"
-      :rules="rules"
-      :model="userInfos"
-    >
-      <el-form-item label="头像">
-        <el-avatar :size="80" :src="userInfos.avatar" />
-        <el-upload
-          ref="uploadRef"
-          accept="image/*"
-          action="#"
-          :limit="1"
-          :auto-upload="false"
-          :show-file-list="false"
-          :on-change="onChange"
-        >
-          <el-button plain class="ml-4">
-            <IconifyIconOffline :icon="uploadLine" />
-            <span class="ml-2">更新头像</span>
-          </el-button>
-        </el-upload>
-      </el-form-item>
-      <el-form-item label="昵称" prop="nickname">
-        <el-input v-model="userInfos.nickname" placeholder="请输入昵称" />
-      </el-form-item>
-      <el-form-item label="邮箱" prop="email">
-        <el-autocomplete
-          v-model="userInfos.email"
-          :fetch-suggestions="queryEmail"
-          :trigger-on-focus="false"
-          placeholder="请输入邮箱"
-          clearable
-          class="w-full"
-        />
-      </el-form-item>
-      <el-form-item label="联系电话">
-        <el-input
-          v-model="userInfos.phone"
-          placeholder="请输入联系电话"
-          clearable
-        />
-      </el-form-item>
-      <el-form-item label="简介">
-        <el-input
-          v-model="userInfos.description"
-          placeholder="请输入简介"
-          type="textarea"
-          :autosize="{ minRows: 6, maxRows: 8 }"
-          maxlength="56"
-          show-word-limit
-        />
-      </el-form-item>
-      <el-button type="primary" @click="onSubmit(userInfoFormRef)">
-        更新信息
-      </el-button>
-    </el-form>
-    <el-dialog
-      v-model="isShow"
-      width="40%"
-      title="编辑头像"
-      destroy-on-close
-      :closeOnClickModal="false"
-      :before-close="handleClose"
-      :fullscreen="deviceDetection()"
-    >
-      <ReCropperPreview ref="cropRef" :imgSrc="imgSrc" @cropper="onCropper" />
-      <template #footer>
-        <div class="dialog-footer">
-          <el-button bg text @click="handleClose">取消</el-button>
-          <el-button bg text type="primary" @click="handleSubmitImage">
-            确定
-          </el-button>
-        </div>
-      </template>
-    </el-dialog>
-  </div>
-</template>

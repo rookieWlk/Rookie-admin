@@ -10,6 +10,11 @@
 
 - `Tailwindcss`：[https://www.tailwindcss.cn/](https://www.tailwindcss.cn/)
 
+### 开发环境
+
+- `node` 版本应不小于 `18.18.0`
+- `pnpm` 版本应不小于 `9`
+
 ### 安装依赖
 
 ```bash

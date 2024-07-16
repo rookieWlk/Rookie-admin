@@ -1,37 +1,3 @@
-<script setup lang="tsx">
-import { ref } from "vue";
-import ReCropper from "@/components/ReCropper";
-import { formatBytes } from "@pureadmin/utils";
-
-defineOptions({
-  name: "ReCropperPreview"
-});
-
-defineProps({
-  imgSrc: String
-});
-
-const emit = defineEmits(["cropper"]);
-
-const infos = ref();
-const popoverRef = ref();
-const refCropper = ref();
-const showPopover = ref(false);
-const cropperImg = ref<string>("");
-
-function onCropper({ base64, blob, info }) {
-  infos.value = info;
-  cropperImg.value = base64;
-  emit("cropper", { base64, blob, info });
-}
-
-function hidePopover() {
-  popoverRef.value.hide();
-}
-
-defineExpose({ hidePopover });
-</script>
-
 <template>
   <div v-loading="!showPopover" element-loading-background="transparent">
     <el-popover
@@ -74,3 +40,37 @@ defineExpose({ hidePopover });
     </el-popover>
   </div>
 </template>
+
+<script setup lang="tsx">
+import { ref } from "vue";
+import ReCropper from "@/components/ReCropper";
+import { formatBytes } from "@pureadmin/utils";
+
+defineOptions({
+  name: "ReCropperPreview"
+});
+
+defineProps({
+  imgSrc: String
+});
+
+const emit = defineEmits(["cropper"]);
+
+const infos = ref();
+const popoverRef = ref();
+const refCropper = ref();
+const showPopover = ref(false);
+const cropperImg = ref<string>("");
+
+function onCropper({ base64, blob, info }) {
+  infos.value = info;
+  cropperImg.value = base64;
+  emit("cropper", { base64, blob, info });
+}
+
+function hidePopover() {
+  popoverRef.value.hide();
+}
+
+defineExpose({ hidePopover });
+</script>

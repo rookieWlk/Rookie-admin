@@ -1,3 +1,23 @@
+<template>
+  <!-- 左侧bpmn元素选择器 -->
+  <div class="node-panel">
+    <div
+      v-for="item in nodeList"
+      :key="item.text"
+      class="node-item dark:text-bg_color"
+      @mousedown="nodeDragNode(item)"
+    >
+      <div class="node-item-icon" :class="item.class">
+        <div
+          v-if="item.type === 'user' || item.type === 'time'"
+          class="shape"
+        />
+      </div>
+      <span class="node-label">{{ item.text }}</span>
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { ref, unref } from "vue";
 import { LogicFlow } from "@logicflow/core";
@@ -30,26 +50,6 @@ const nodeDragNode = item => {
   });
 };
 </script>
-
-<template>
-  <!-- 左侧bpmn元素选择器 -->
-  <div class="node-panel">
-    <div
-      v-for="item in nodeList"
-      :key="item.text"
-      class="node-item dark:text-bg_color"
-      @mousedown="nodeDragNode(item)"
-    >
-      <div class="node-item-icon" :class="item.class">
-        <div
-          v-if="item.type === 'user' || item.type === 'time'"
-          class="shape"
-        />
-      </div>
-      <span class="node-label">{{ item.text }}</span>
-    </div>
-  </div>
-</template>
 
 <style scoped>
 .node-panel {
