@@ -1,3 +1,38 @@
+<template>
+  <div class="control-container">
+    <!-- 功能按钮 -->
+    <ul>
+      <li
+        v-for="(item, key) in titleLists"
+        :key="key"
+        :title="item.text"
+        class="dark:text-bg_color"
+        @mouseenter.prevent="onEnter(key)"
+        @mouseleave.prevent="focusIndex = -1"
+      >
+        <button
+          :ref="'controlButton' + key"
+          v-tippy="{
+            content: item.text
+          }"
+          :disabled="item.disabled"
+          :style="{
+            cursor: item.disabled === false ? 'pointer' : 'not-allowed',
+            color: item.disabled === false ? '' : '#00000040',
+            background: 'transparent'
+          }"
+          @click="onControl(item, key)"
+        >
+          <span
+            :class="'iconfont ' + item.icon"
+            :style="{ fontSize: `${item.size}px` }"
+          />
+        </button>
+      </li>
+    </ul>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { ref, unref, onMounted } from "vue";
 import { LogicFlow } from "@logicflow/core";
@@ -92,41 +127,6 @@ onMounted(() => {
   });
 });
 </script>
-
-<template>
-  <div class="control-container">
-    <!-- 功能按钮 -->
-    <ul>
-      <li
-        v-for="(item, key) in titleLists"
-        :key="key"
-        :title="item.text"
-        class="dark:text-bg_color"
-        @mouseenter.prevent="onEnter(key)"
-        @mouseleave.prevent="focusIndex = -1"
-      >
-        <button
-          :ref="'controlButton' + key"
-          v-tippy="{
-            content: item.text
-          }"
-          :disabled="item.disabled"
-          :style="{
-            cursor: item.disabled === false ? 'pointer' : 'not-allowed',
-            color: item.disabled === false ? '' : '#00000040',
-            background: 'transparent'
-          }"
-          @click="onControl(item, key)"
-        >
-          <span
-            :class="'iconfont ' + item.icon"
-            :style="{ fontSize: `${item.size}px` }"
-          />
-        </button>
-      </li>
-    </ul>
-  </div>
-</template>
 
 <style scoped>
 @import url("./assets/iconfont/iconfont.css");
