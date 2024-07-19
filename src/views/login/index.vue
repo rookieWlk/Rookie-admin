@@ -253,7 +253,6 @@ import { ref, toRaw, reactive, watch, computed } from "vue";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 import { useTranslationLang } from "@/layout/hooks/useTranslationLang";
 import { useDataThemeChange } from "@/layout/hooks/useDataThemeChange";
-
 import dayIcon from "@/assets/svg/day.svg?component";
 import darkIcon from "@/assets/svg/dark.svg?component";
 import globalization from "@/assets/svg/globalization.svg?component";
@@ -284,6 +283,8 @@ const { dataTheme, overallStyle, dataThemeChange } = useDataThemeChange();
 dataThemeChange(overallStyle.value);
 const { title, getDropdownItemStyle, getDropdownItemClass } = useNav();
 const { locale, translationCh, translationEn } = useTranslationLang();
+// 用于查看当前环境变量
+const { VITE_PUBLIC_PATH } = import.meta.env;
 
 const ruleForm = reactive({
   username: "admin",
@@ -292,6 +293,7 @@ const ruleForm = reactive({
 });
 
 const onLogin = async (formEl: FormInstance | undefined) => {
+  console.log("当前环境变量VITE_PUBLIC_PATH为：", VITE_PUBLIC_PATH);
   if (!formEl) return;
   await formEl.validate(valid => {
     if (valid) {
@@ -300,6 +302,7 @@ const onLogin = async (formEl: FormInstance | undefined) => {
         .loginByUsername({ username: ruleForm.username, password: "admin123" })
         .then(res => {
           if (res.success) {
+            console.log(res, "----------------------------");
             // 获取后端路由
             return initRouter().then(() => {
               disabled.value = true;

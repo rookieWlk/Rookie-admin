@@ -7,7 +7,7 @@ import boxen, { type Options as BoxenOptions } from "boxen";
 dayjs.extend(duration);
 
 const welcomeMessage = gradientString("cyan", "magenta").multiline(
-  `江苏科淮一枚前端切图仔启动项目中......`
+  `一枚前端切图仔正在挠头中......`
 );
 
 const boxenOptions: BoxenOptions = {

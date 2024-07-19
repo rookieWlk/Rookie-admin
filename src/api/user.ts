@@ -1,4 +1,5 @@
 import { http } from "@/utils/http";
+// import { baseUrlApi } from "./utils";
 
 export type UserResult = {
   success: boolean;
@@ -67,6 +68,12 @@ type ResultTable = {
 };
 
 /** 登录 */
+// 接口登录
+// export const getLogin = (data?: object) => {
+//   return http.request<UserResult>("post", baseUrlApi("/auth/oauth/token"), {
+//     data
+//   });
+// };
 export const getLogin = (data?: object) => {
   return http.request<UserResult>("post", "/login", { data });
 };
