@@ -14,6 +14,7 @@ import {
 } from "../utils";
 import { usePermissionStoreHook } from "./permission";
 
+// 定义 useMultiTagsStore 存储库
 export const useMultiTagsStore = defineStore({
   id: "pure-multiTags",
   state: () => ({
@@ -30,16 +31,19 @@ export const useMultiTagsStore = defineStore({
             v => v?.meta?.fixedTag
           )
         ],
+    // 多标签页缓存
     multiTagsCache: storageLocal().getItem<StorageConfigs>(
       `${responsiveStorageNameSpace()}configure`
     )?.multiTagsCache
   }),
   getters: {
+    // 获取多标签页缓存
     getMultiTagsCache(state) {
       return state.multiTagsCache;
     }
   },
   actions: {
+    // 更改多标签页缓存状态
     multiTagsCacheChange(multiTagsCache: boolean) {
       this.multiTagsCache = multiTagsCache;
       if (multiTagsCache) {
@@ -51,6 +55,7 @@ export const useMultiTagsStore = defineStore({
         storageLocal().removeItem(`${responsiveStorageNameSpace()}tags`);
       }
     },
+    // 缓存多标签页数据
     tagsCache(multiTags) {
       this.getMultiTagsCache &&
         storageLocal().setItem(
@@ -58,6 +63,7 @@ export const useMultiTagsStore = defineStore({
           multiTags
         );
     },
+    // 处理多标签页
     handleTags<T>(
       mode: string,
       value?: T | multiType,
@@ -141,6 +147,7 @@ export const useMultiTagsStore = defineStore({
   }
 });
 
+// 导出 useMultiTagsStoreHook 钩子函数
 export function useMultiTagsStoreHook() {
   return useMultiTagsStore(store);
 }

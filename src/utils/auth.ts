@@ -31,7 +31,10 @@ export const multipleTabsKey = "multiple-tabs";
 
 /** 获取`token` */
 export function getToken(): DataInfo<number> {
-  // 此处与`TokenKey`相同，此写法解决初始化时`Cookies`中不存在`TokenKey`报错
+  // 此处与`TokenKey`相同，此写法解决初始化时`Cookies`中不存在`TokenKey`报错.
+  // 从 Cookie 中获取 token 信息,
+  // 如果 Cookie 中存在 token 信息，则解析并返回,
+  // 如果 Cookie 中不存在 token 信息，则从 localStorage 中获取
   return Cookies.get(TokenKey)
     ? JSON.parse(Cookies.get(TokenKey))
     : storageLocal().getItem(userKey);
@@ -47,15 +50,16 @@ export function setToken(data: DataInfo<Date>) {
   let expires = 0;
   const { accessToken, refreshToken } = data;
   const { isRemembered, loginDay } = useUserStoreHook();
-  expires = new Date(data.expires).getTime(); // 如果后端直接设置时间戳，将此处代码改为expires = data.expires，然后把上面的DataInfo<Date>改成DataInfo<number>即可
+  // 获取过期时间，如果后端直接设置时间戳，将此处代码改为expires = data.expires，然后把上面的DataInfo<Date>改成DataInfo<number>即可
+  expires = new Date(data.expires).getTime();
+  // 将 accessToken、expires、refreshToken 存放在 cookie 中
   const cookieString = JSON.stringify({ accessToken, expires, refreshToken });
-
   expires > 0
     ? Cookies.set(TokenKey, cookieString, {
         expires: (expires - Date.now()) / 86400000
       })
     : Cookies.set(TokenKey, cookieString);
-
+  // 设置多标签共享 token 的标志
   Cookies.set(
     multipleTabsKey,
     "true",
@@ -65,7 +69,7 @@ export function setToken(data: DataInfo<Date>) {
         }
       : {}
   );
-
+  // 设置用户信息
   function setUserKey({ avatar, username, nickname, roles }) {
     useUserStoreHook().SET_AVATAR(avatar);
     useUserStoreHook().SET_USERNAME(username);
@@ -80,7 +84,7 @@ export function setToken(data: DataInfo<Date>) {
       roles
     });
   }
-
+  // 如果接口返回了用户信息，则设置用户信息
   if (data.username && data.roles) {
     const { username, roles } = data;
     setUserKey({
@@ -89,6 +93,7 @@ export function setToken(data: DataInfo<Date>) {
       nickname: data?.nickname ?? "",
       roles
     });
+    // 否则从 localStorage 中获取用户信息
   } else {
     const avatar =
       storageLocal().getItem<DataInfo<number>>(userKey)?.avatar ?? "";
