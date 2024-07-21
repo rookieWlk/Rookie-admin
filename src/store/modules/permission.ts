@@ -12,8 +12,12 @@ import {
 } from "../utils";
 import { useMultiTagsStoreHook } from "./multiTags";
 
+// 1. 定义 usePermissionStore
 export const usePermissionStore = defineStore({
+  // 2. 给 store 设置一个唯一的 ID
   id: "pure-permission",
+
+  // 3. 定义 state
   state: () => ({
     // 静态路由生成的菜单
     constantMenus,
@@ -21,33 +25,43 @@ export const usePermissionStore = defineStore({
     wholeMenus: [],
     // 整体路由（一维数组格式）
     flatteningRoutes: [],
-    // 缓存页面keepAlive
+    // 缓存页面 keepAlive
     cachePageList: []
   }),
+
+  // 4. 定义 actions
   actions: {
     /** 组装整体路由生成的菜单 */
     handleWholeMenus(routes: any[]) {
+      // 过滤无权限的路由菜单,并按照升序排列
       this.wholeMenus = filterNoPermissionTree(
         filterTree(ascending(this.constantMenus.concat(routes)))
       );
+      // 将路由菜单扁平化处理
       this.flatteningRoutes = formatFlatteningRoutes(
         this.constantMenus.concat(routes)
       );
     },
+
+    // 缓存页面操作
     cacheOperate({ mode, name }: cacheType) {
       const delIndex = this.cachePageList.findIndex(v => v === name);
       switch (mode) {
         case "refresh":
+          // 从缓存列表中移除指定页面
           this.cachePageList = this.cachePageList.filter(v => v !== name);
           break;
         case "add":
+          // 添加页面到缓存列表
           this.cachePageList.push(name);
           break;
         case "delete":
+          // 从缓存列表中删除指定页面
           delIndex !== -1 && this.cachePageList.splice(delIndex, 1);
           break;
       }
-      /** 监听缓存页面是否存在于标签页，不存在则删除 */
+
+      // 监听缓存页面是否存在于标签页,不存在则删除
       debounce(() => {
         let cacheLength = this.cachePageList.length;
         const nameList = getKeyList(useMultiTagsStoreHook().multiTags, "name");
@@ -62,7 +76,8 @@ export const usePermissionStore = defineStore({
         }
       })();
     },
-    /** 清空缓存页面 */
+
+    // 清空缓存页面
     clearAllCachePage() {
       this.wholeMenus = [];
       this.cachePageList = [];
@@ -70,6 +85,7 @@ export const usePermissionStore = defineStore({
   }
 });
 
+// 5. 定义 usePermissionStoreHook 函数
 export function usePermissionStoreHook() {
   return usePermissionStore(store);
 }
