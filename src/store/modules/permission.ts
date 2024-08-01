@@ -63,15 +63,21 @@ export const usePermissionStore = defineStore({
 
       // 监听缓存页面是否存在于标签页,不存在则删除
       debounce(() => {
+        // 获取缓存页面列表的长度
         let cacheLength = this.cachePageList.length;
+        // 获取标签页列表的 name 列表
         const nameList = getKeyList(useMultiTagsStoreHook().multiTags, "name");
+        // 循环缓存页面列表
         while (cacheLength > 0) {
+          // 检查缓存页面是否在标签页列表中
+          // 如果不在,则从缓存页面列表中删除该页面
           nameList.findIndex(v => v === this.cachePageList[cacheLength - 1]) ===
             -1 &&
             this.cachePageList.splice(
               this.cachePageList.indexOf(this.cachePageList[cacheLength - 1]),
               1
             );
+          // 减少缓存页面列表的长度
           cacheLength--;
         }
       })();
