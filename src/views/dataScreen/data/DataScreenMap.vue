@@ -349,7 +349,7 @@ setOptions({
     layoutSize: "120%",
     itemStyle: {
       // areaColor: '',
-      color: "rgba(51, 69, 89, .5)",
+      color: "#00002e",
       borderColor: "rgba(100,149,237,1)"
     }
   },
