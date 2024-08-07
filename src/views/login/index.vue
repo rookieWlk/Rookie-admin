@@ -218,7 +218,7 @@
       Copyright © 2020-present
       <a
         class="hover:text-primary"
-        href="https://github.com/pure-admin"
+        href="https://github.com/rookieWlk"
         target="_blank"
       >
         &nbsp;{{ title }}
