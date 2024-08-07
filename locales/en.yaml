@@ -65,12 +65,14 @@ menus:
   pureHome: Home
   pureLogin: Login
   pureEmpty: Empty Page
+  dataScreen: Data Screen
   pureTable: Table
   pureSysManagement: System Manage
   pureUser: User Manage
   pureRole: Role Manage
   pureSystemMenu: Menu Manage
   pureDept: Dept Manage
+  pureDictionary: Dictionary Manage
   pureSysMonitor: System Monitor
   pureOnlineUser: Online User
   pureLoginLog: Login Log

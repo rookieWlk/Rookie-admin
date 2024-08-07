@@ -16,6 +16,7 @@ import {
 import { useMultiTagsStoreHook } from "./multiTags";
 import { type DataInfo, setToken, removeToken, userKey } from "@/utils/auth";
 
+// 定义 useUserStore 用于状态管理
 export const useUserStore = defineStore({
   id: "pure-user",
   state: (): userType => ({
@@ -74,34 +75,47 @@ export const useUserStore = defineStore({
       return new Promise<UserResult>((resolve, reject) => {
         getLogin(data)
           .then(data => {
+            // 登录成功后，将登录信息保存到 token 中
             if (data?.success) setToken(data.data);
+            // 返回登录结果
             resolve(data);
           })
           .catch(error => {
+            // 登录失败，拒绝 Promise
             reject(error);
           });
       });
     },
     /** 前端登出（不调用接口） */
     logOut() {
+      // 1. 清空用户名和角色信息
       this.username = "";
       this.roles = [];
+      // 2. 清除 token
       removeToken();
+      // 3. 移除所有标签页
       useMultiTagsStoreHook().handleTags("equal", [...routerArrays]);
+      // 4. 重置路由
       resetRouter();
+      // 5. 跳转到登录页
       router.push("/login");
     },
     /** 刷新`token` */
     async handRefreshToken(data) {
       return new Promise<RefreshTokenResult>((resolve, reject) => {
+        // 调用刷新 token 接口
         refreshTokenApi(data)
           .then(data => {
+            // 如果刷新 token 成功
             if (data) {
+              // 将新的 token 信息保存到 token 中
               setToken(data.data);
+              // 返回刷新 token 的结果
               resolve(data);
             }
           })
           .catch(error => {
+            // 刷新 token 失败，拒绝 Promise
             reject(error);
           });
       });
@@ -109,6 +123,7 @@ export const useUserStore = defineStore({
   }
 });
 
+// 导出 useUserStoreHook 供其他地方使用
 export function useUserStoreHook() {
   return useUserStore(store);
 }

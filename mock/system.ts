@@ -283,6 +283,12 @@ export default defineFakeRoute([
             menuType: 0,
             title: "menus.pureDept"
           },
+          {
+            parentId: 300,
+            id: 305,
+            menuType: 0,
+            title: "menus.pureDictionary"
+          },
           // 系统监控
           {
             parentId: 0,
@@ -894,6 +900,30 @@ export default defineFakeRoute([
             rank: null,
             redirect: "",
             icon: "ri:git-branch-line",
+            extraIcon: "",
+            enterTransition: "",
+            leaveTransition: "",
+            activePath: "",
+            auths: "",
+            frameSrc: "",
+            frameLoading: true,
+            keepAlive: false,
+            hiddenTag: false,
+            fixedTag: false,
+            showLink: true,
+            showParent: false
+          },
+          {
+            parentId: 300,
+            id: 305,
+            menuType: 0,
+            title: "menus.pureDictionary",
+            name: "SystemDictionary",
+            path: "/system/dict/index",
+            component: "",
+            rank: null,
+            redirect: "",
+            icon: "ep:memo",
             extraIcon: "",
             enterTransition: "",
             leaveTransition: "",

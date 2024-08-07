@@ -38,6 +38,7 @@
     ]
   },
   "include": [
+    // 开发环境需要注释"mock/*.ts",
     "mock/*.ts",
     "src/**/*.ts",
     "src/**/*.tsx",
