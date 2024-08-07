@@ -30,57 +30,81 @@
           overflow: hidden;
         }
 
-        .loader,
-        .loader::before,
-        .loader::after {
-          width: 2.5em;
-          height: 2.5em;
-          border-radius: 50%;
-          animation: load-animation 1.8s infinite ease-in-out;
-          animation-fill-mode: both;
+        .loading {
+          display: block;
+          width: 4rem;
+          height: 4rem;
+          font-size: 0;
+          color: #000;
+          animation: ball-spin-rotate 2s infinite linear;
         }
 
-        .loader {
+        .loading.la-dark {
+          color: #333;
+        }
+
+        .loading > div {
           position: relative;
-          top: 0;
-          margin: 80px auto;
-          font-size: 10px;
-          color: #406eeb;
-          text-indent: -9999em;
-          transform: translateZ(0);
-          transform: translate(-50%, 0);
-          animation-delay: -0.16s;
-        }
-
-        .loader::before,
-        .loader::after {
           position: absolute;
           top: 0;
-          content: "";
+          box-sizing: border-box;
+          display: inline-block;
+          float: none;
+          width: 60%;
+          height: 60%;
+          background-color: currentcolor;
+          border: 0 solid currentcolor;
+          border-radius: 100%;
+          animation: ball-spin-bounce 2s infinite ease-in-out;
         }
 
-        .loader::before {
-          left: -3.5em;
-          animation-delay: -0.32s;
+        .loading > div:first-child {
+          background-color: #386bf3;
         }
 
-        .loader::after {
-          left: 3.5em;
+        .loading > div:last-child {
+          top: auto;
+          bottom: 0;
+          background-color: #c3d2fb;
+          animation-delay: -1s;
         }
 
-        @keyframes load-animation {
-          0%,
-          80%,
+        .loading.la-sm {
+          width: 2rem;
+          height: 2rem;
+        }
+
+        .loading.la-2x {
+          width: 8rem;
+          height: 8rem;
+        }
+
+        .loading.la-3x {
+          width: 12rem;
+          height: 12rem;
+        }
+
+        @keyframes ball-spin-rotate {
           100% {
-            box-shadow: 0 2.5em 0 -1.3em;
+            transform: rotate(360deg);
+          }
+        }
+
+        @keyframes ball-spin-bounce {
+          0%,
+          100% {
+            transform: scale(0);
           }
 
-          40% {
-            box-shadow: 0 2.5em 0 0;
+          50% {
+            transform: scale(1);
           }
         }
       </style>
-      <div class="loader"></div>
+      <div class="loading">
+        <div></div>
+        <div></div>
+      </div>
     </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
