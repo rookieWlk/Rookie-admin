@@ -39,6 +39,17 @@ export default [
       rank: 103
     }
   },
+  // 数据大屏 无layout页
+  {
+    path: "/dataScreen",
+    name: "DataScreen",
+    component: () => import("@/views/dataScreen/inedx.vue"),
+    meta: {
+      title: $t("menus.dataScreen"),
+      showLink: false,
+      rank: 103
+    }
+  },
   {
     path: "/account-settings",
     name: "AccountSettings",
