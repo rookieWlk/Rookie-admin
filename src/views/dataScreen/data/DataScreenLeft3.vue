@@ -35,77 +35,77 @@ const listData = reactive<any>([
   {
     avatar: "https://wanglikai.cn/img/avatar.png",
     name: "WLK",
-    address: "Rookie admin data screen list NO.1"
+    address: "Rookie Admin data screen list NO.1"
   },
   {
     avatar: "https://wanglikai.cn/img/avatar.png",
     name: "WLK",
-    address: "Rookie admin data screen list NO.2"
+    address: "Rookie Admin data screen list NO.2"
   },
   {
     avatar: "https://wanglikai.cn/img/avatar.png",
     name: "WLK",
-    address: "Rookie admin data screen list NO.3"
+    address: "Rookie Admin data screen list NO.3"
   },
   {
     avatar: "https://wanglikai.cn/img/avatar.png",
     name: "WLK",
-    address: "Rookie admin data screen list NO.4"
+    address: "Rookie Admin data screen list NO.4"
   },
   {
     avatar: "https://wanglikai.cn/img/avatar.png",
     name: "WLK",
-    address: "Rookie admin data screen list NO.5"
+    address: "Rookie Admin data screen list NO.5"
   },
   {
     avatar: "https://wanglikai.cn/img/avatar.png",
     name: "WLK",
-    address: "Rookie admin data screen list NO.6"
+    address: "Rookie Admin data screen list NO.6"
   },
   {
     avatar: "https://wanglikai.cn/img/avatar.png",
     name: "WLK",
-    address: "Rookie admin data screen list NO.7"
+    address: "Rookie Admin data screen list NO.7"
   },
   {
     avatar: "https://wanglikai.cn/img/avatar.png",
     name: "WLK",
-    address: "Rookie admin data screen list NO.8"
+    address: "Rookie Admin data screen list NO.8"
   },
   {
     avatar: "https://wanglikai.cn/img/avatar.png",
     name: "WLK",
-    address: "Rookie admin data screen list NO.9"
+    address: "Rookie Admin data screen list NO.9"
   },
   {
     avatar: "https://wanglikai.cn/img/avatar.png",
     name: "WLK",
-    address: "Rookie admin data screen list NO.10"
+    address: "Rookie Admin data screen list NO.10"
   },
   {
     avatar: "https://wanglikai.cn/img/avatar.png",
     name: "WLK",
-    address: "Rookie admin data screen list NO.11"
+    address: "Rookie Admin data screen list NO.11"
   },
   {
     avatar: "https://wanglikai.cn/img/avatar.png",
     name: "WLK",
-    address: "Rookie admin data screen list NO.12"
+    address: "Rookie Admin data screen list NO.12"
   },
   {
     avatar: "https://wanglikai.cn/img/avatar.png",
     name: "WLK",
-    address: "Rookie admin data screen list NO.13"
+    address: "Rookie Admin data screen list NO.13"
   },
   {
     avatar: "https://wanglikai.cn/img/avatar.png",
     name: "WLK",
-    address: "Rookie admin data screen list NO.14"
+    address: "Rookie Admin data screen list NO.14"
   },
   {
     avatar: "https://wanglikai.cn/img/avatar.png",
     name: "WLK",
-    address: "Rookie admin data screen list NO.15"
+    address: "Rookie Admin data screen list NO.15"
   }
 ]);
 
