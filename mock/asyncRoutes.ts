@@ -51,6 +51,15 @@ const systemManagementRouter = {
         title: "menus.pureDept",
         roles: ["admin"]
       }
+    },
+    {
+      path: "/system/dict/index",
+      name: "SystemDictionary",
+      meta: {
+        icon: "ep:memo",
+        title: "menus.pureDictionary",
+        roles: ["admin"]
+      }
     }
   ]
 };
@@ -106,6 +115,27 @@ const systemMonitorRouter = {
   ]
 };
 
+// 最简代码，也就是这些字段必须有
+const dataScreenRouter = {
+  path: "/dataScreen",
+  meta: {
+    icon: "ep:data-analysis",
+    title: "menus.dataScreen"
+  },
+  children: [
+    {
+      // path随便写，但前面必须有个 `/`
+      path: "/dataScreen",
+      // component对应的值前不需要加 / 值对应的是实际业务 `.vue` 或 `.tsx` 代码路径
+      component: "dataScreen/index.vue",
+      name: "dataScreen",
+      meta: {
+        title: "menus.dataScreen"
+      }
+    }
+  ]
+};
+
 export default defineFakeRoute([
   {
     url: "/get-async-routes",
@@ -113,7 +143,7 @@ export default defineFakeRoute([
     response: () => {
       return {
         success: true,
-        data: [systemManagementRouter, systemMonitorRouter]
+        data: [systemManagementRouter, systemMonitorRouter, dataScreenRouter]
       };
     }
   }
