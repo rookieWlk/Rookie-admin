@@ -12,6 +12,8 @@ import { injectResponsiveStorage } from "@/utils/responsive";
 
 import Table from "@pureadmin/table";
 import PureDescriptions from "@pureadmin/descriptions";
+// 引入echarts
+import * as echarts from "echarts";
 
 // 引入重置样式
 import "./style/reset.scss";
@@ -51,7 +53,8 @@ import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 import VueTippy from "vue-tippy";
 app.use(VueTippy);
-
+// 这里$echarts写法自由，起名a、b、c都行，只要保证等号右侧引入的是echarts即可
+app.config.globalProperties.$echarts = echarts;
 getPlatformConfig(app).then(async config => {
   setupStore(app);
   app.use(router);

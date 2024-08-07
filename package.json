@@ -48,6 +48,7 @@
   },
   "dependencies": {
     "@amap/amap-jsapi-loader": "^1.0.1",
+    "@esmjs/geo": "^1.0.0",
     "@howdyjs/mouse-menu": "^2.1.3",
     "@infectoone/vue-ganttastic": "^2.3.2",
     "@logicflow/core": "^1.2.27",
