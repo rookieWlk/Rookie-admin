@@ -302,7 +302,6 @@ const onLogin = async (formEl: FormInstance | undefined) => {
         .loginByUsername({ username: ruleForm.username, password: "admin123" })
         .then(res => {
           if (res.success) {
-            console.log(res, "----------------------------");
             // 获取后端路由
             return initRouter().then(() => {
               disabled.value = true;
