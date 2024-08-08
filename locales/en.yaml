@@ -66,6 +66,7 @@ menus:
   pureLogin: Login
   pureEmpty: Empty Page
   dataScreen: Data Screen
+  portal: Portal
   pureTable: Table
   pureSysManagement: System Manage
   pureUser: User Manage

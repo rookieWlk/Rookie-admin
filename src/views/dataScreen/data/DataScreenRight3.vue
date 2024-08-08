@@ -84,6 +84,9 @@ setOptions(
         type: "line",
         symbolSize: 10,
         symbol: "circle",
+        itemStyle: {
+          color: "#35bdea"
+        },
         lineStyle: {
           color: "#00c4ff"
         },

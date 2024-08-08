@@ -66,6 +66,7 @@ menus:
   pureLogin: 登录
   pureEmpty: 无Layout页
   dataScreen: 数据大屏
+  portal: 门户网站
   pureTable: 表格
   pureSysManagement: 系统管理
   pureUser: 用户管理
