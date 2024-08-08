@@ -1,59 +1,7 @@
-<script setup lang="ts">
-import { ref } from "vue";
-import tree from "./tree.vue";
-import { useUser } from "./utils/hook";
-import { PureTableBar } from "@/components/RePureTableBar";
-import { useRenderIcon } from "@/components/ReIcon/src/hooks";
-
-import Upload from "@iconify-icons/ri/upload-line";
-import Role from "@iconify-icons/ri/admin-line";
-import Password from "@iconify-icons/ri/lock-password-line";
-import More from "@iconify-icons/ep/more-filled";
-import Delete from "@iconify-icons/ep/delete";
-import EditPen from "@iconify-icons/ep/edit-pen";
-import Refresh from "@iconify-icons/ep/refresh";
-import AddFill from "@iconify-icons/ri/add-circle-line";
-
-defineOptions({
-  name: "SystemUser"
-});
-
-const treeRef = ref();
-const formRef = ref();
-const tableRef = ref();
-
-const {
-  form,
-  loading,
-  columns,
-  dataList,
-  treeData,
-  treeLoading,
-  selectedNum,
-  pagination,
-  buttonClass,
-  deviceDetection,
-  onSearch,
-  resetForm,
-  onbatchDel,
-  openDialog,
-  onTreeSelect,
-  handleUpdate,
-  handleDelete,
-  handleUpload,
-  handleReset,
-  handleRole,
-  handleSizeChange,
-  onSelectionCancel,
-  handleCurrentChange,
-  handleSelectionChange
-} = useUser(tableRef, treeRef);
-</script>
-
 <template>
   <div :class="['flex', 'justify-between', deviceDetection() && 'flex-wrap']">
-    <tree
-      ref="treeRef"
+    <dictList
+      ref="dictListRef"
       :class="['mr-2', deviceDetection() ? 'w-full' : 'min-w-[200px]']"
       :treeData="treeData"
       :treeLoading="treeLoading"
@@ -197,56 +145,6 @@ const {
                   </el-button>
                 </template>
               </el-popconfirm>
-              <el-dropdown>
-                <el-button
-                  class="ml-3 mt-[2px]"
-                  link
-                  type="primary"
-                  :size="size"
-                  :icon="useRenderIcon(More)"
-                  @click="handleUpdate(row)"
-                />
-                <template #dropdown>
-                  <el-dropdown-menu>
-                    <el-dropdown-item>
-                      <el-button
-                        :class="buttonClass"
-                        link
-                        type="primary"
-                        :size="size"
-                        :icon="useRenderIcon(Upload)"
-                        @click="handleUpload(row)"
-                      >
-                        上传头像
-                      </el-button>
-                    </el-dropdown-item>
-                    <el-dropdown-item>
-                      <el-button
-                        :class="buttonClass"
-                        link
-                        type="primary"
-                        :size="size"
-                        :icon="useRenderIcon(Password)"
-                        @click="handleReset(row)"
-                      >
-                        重置密码
-                      </el-button>
-                    </el-dropdown-item>
-                    <el-dropdown-item>
-                      <el-button
-                        :class="buttonClass"
-                        link
-                        type="primary"
-                        :size="size"
-                        :icon="useRenderIcon(Role)"
-                        @click="handleRole(row)"
-                      >
-                        分配角色
-                      </el-button>
-                    </el-dropdown-item>
-                  </el-dropdown-menu>
-                </template>
-              </el-dropdown>
             </template>
           </pure-table>
         </template>
@@ -254,6 +152,55 @@ const {
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { ref } from "vue";
+import dictList from "./dictList.vue";
+import { useUser } from "./utils/hook";
+import { PureTableBar } from "@/components/RePureTableBar";
+import { useRenderIcon } from "@/components/ReIcon/src/hooks";
+
+import Upload from "@iconify-icons/ri/upload-line";
+import Role from "@iconify-icons/ri/admin-line";
+import Password from "@iconify-icons/ri/lock-password-line";
+import More from "@iconify-icons/ep/more-filled";
+import Delete from "@iconify-icons/ep/delete";
+import EditPen from "@iconify-icons/ep/edit-pen";
+import Refresh from "@iconify-icons/ep/refresh";
+import AddFill from "@iconify-icons/ri/add-circle-line";
+
+defineOptions({
+  name: "SystemUser"
+});
+
+const dictListRef = ref();
+const formRef = ref();
+const tableRef = ref();
+
+const {
+  form,
+  loading,
+  columns,
+  dataList,
+  treeData,
+  treeLoading,
+  selectedNum,
+  pagination,
+  buttonClass,
+  deviceDetection,
+  onSearch,
+  resetForm,
+  onbatchDel,
+  openDialog,
+  onTreeSelect,
+  handleUpdate,
+  handleDelete,
+  handleSizeChange,
+  onSelectionCancel,
+  handleCurrentChange,
+  handleSelectionChange
+} = useUser(tableRef, dictListRef);
+</script>
 
 <style scoped lang="scss">
 :deep(.el-dropdown-menu__item i) {

@@ -48,6 +48,10 @@ export const getMenuList = (data?: object) => {
 export const getDeptList = (data?: object) => {
   return http.request<Result>("post", "/dept", { data });
 };
+/** 获取字典管理-字典管理左侧列表 */
+export const getDictList = (data?: object) => {
+  return http.request<Result>("post", "/dict", { data });
+};
 
 /** 获取系统监控-在线用户列表 */
 export const getOnlineLogsList = (data?: object) => {

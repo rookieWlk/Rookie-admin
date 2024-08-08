@@ -1301,6 +1301,23 @@ export default defineFakeRoute([
       };
     }
   },
+  // 数据字典
+  {
+    url: "/dict",
+    method: "post",
+    response: () => {
+      return {
+        success: true,
+        data: [
+          {
+            dictName: "通知类型(notice type)",
+            parentId: 0,
+            id: 1
+          }
+        ]
+      };
+    }
+  },
   // 在线用户
   {
     url: "/online-logs",
