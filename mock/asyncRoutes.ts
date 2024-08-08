@@ -114,7 +114,7 @@ const systemMonitorRouter = {
     }
   ]
 };
-
+// 数据大屏
 // 最简代码，也就是这些字段必须有
 const dataScreenRouter = {
   path: "/dataScreen",
@@ -135,6 +135,26 @@ const dataScreenRouter = {
     }
   ]
 };
+// 门户网站
+const portalRouter = {
+  path: "/portal",
+  meta: {
+    icon: "ep:guide",
+    title: "menus.portal"
+  },
+  children: [
+    {
+      // path随便写，但前面必须有个 `/`
+      path: "/portal",
+      // component对应的值前不需要加 / 值对应的是实际业务 `.vue` 或 `.tsx` 代码路径
+      component: "portal/index.vue",
+      name: "portal",
+      meta: {
+        title: "menus.portal"
+      }
+    }
+  ]
+};
 
 export default defineFakeRoute([
   {
@@ -143,7 +163,12 @@ export default defineFakeRoute([
     response: () => {
       return {
         success: true,
-        data: [systemManagementRouter, systemMonitorRouter, dataScreenRouter]
+        data: [
+          systemManagementRouter,
+          systemMonitorRouter,
+          dataScreenRouter,
+          portalRouter
+        ]
       };
     }
   }
