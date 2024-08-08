@@ -47,7 +47,37 @@ export default [
     meta: {
       title: $t("menus.dataScreen"),
       showLink: false,
-      rank: 103
+      rank: 104
+    }
+  },
+  {
+    path: "/portal",
+    name: "Portal",
+    component: () => import("@/views/portal/index.vue"),
+    meta: {
+      title: $t("menus.portal"),
+      showLink: false,
+      rank: 105
+    }
+  },
+  {
+    path: "/product",
+    name: "Product",
+    component: () => import("@/views/portal/Product.vue"),
+    meta: {
+      title: "产品简介",
+      showLink: false,
+      rank: 106
+    }
+  },
+  {
+    path: "/partner",
+    name: "Partner",
+    component: () => import("@/views/portal/Partner.vue"),
+    meta: {
+      title: "合作伙伴",
+      showLink: false,
+      rank: 107
     }
   },
   {
@@ -57,7 +87,7 @@ export default [
     meta: {
       title: $t("buttons.pureAccountSettings"),
       showLink: false,
-      rank: 104
+      rank: 108
     }
   }
 ] satisfies Array<RouteConfigsTable>;

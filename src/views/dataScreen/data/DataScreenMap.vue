@@ -336,13 +336,17 @@ setOptions({
   },
   geo: {
     map: "china",
-    // emphasis: {
-    //   label: {
-    //     show: false
-    //   }
-    // },
+    emphasis: {
+      label: {
+        show: true,
+        color: "#fff"
+      },
+      itemStyle: {
+        areaColor: "#173065"
+      }
+    },
     // label: {
-    //   show: true,
+    //   show: true
     // },
     roam: true,
     layoutCenter: ["48%", "70%"],
@@ -358,5 +362,5 @@ setOptions({
 </script>
 
 <template>
-  <div ref="chartRef" style="width: 100%; height: 60vh" />
+  <div ref="chartRef" style="width: 100%; height: 100%" />
 </template>
