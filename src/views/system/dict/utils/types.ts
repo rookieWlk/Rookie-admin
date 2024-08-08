@@ -20,7 +20,16 @@ interface FormItemProps {
 interface FormProps {
   formInline: FormItemProps;
 }
+interface DictFormItemProps {
+  title: string;
+  dictName: string;
+  code: string;
+  remark: string;
+}
 
+interface DictFormProps {
+  formInline: DictFormItemProps;
+}
 interface RoleFormItemProps {
   username: string;
   nickname: string;
@@ -33,4 +42,11 @@ interface RoleFormProps {
   formInline: RoleFormItemProps;
 }
 
-export type { FormItemProps, FormProps, RoleFormItemProps, RoleFormProps };
+export type {
+  FormItemProps,
+  FormProps,
+  RoleFormItemProps,
+  RoleFormProps,
+  DictFormItemProps,
+  DictFormProps
+};
