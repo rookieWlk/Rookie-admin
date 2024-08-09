@@ -7,8 +7,7 @@
           <main>
             <div class="banner-title">合作伙伴计划</div>
             <div class="banner-description">
-              虚位以待，合作共赢，国内Vue3前端付费模板连续多年销量Top1，Vue Shop
-              Vite期待与您共同成长
+              XXXXXXXXX,XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX,XXXXXXXXXXXXXXXXXX,XXXXX期待与您共同成长
             </div>
 
             <el-button
@@ -18,7 +17,7 @@
               target="_blank"
               type="primary"
             >
-              立即购买
+              查看源码
             </el-button>
             <el-button
               href="https://github.com/rookieWlk"
@@ -28,9 +27,8 @@
               target="_blank"
               type="primary"
             >
-              进入产品
+              产品演示
             </el-button>
-
             <div class="image-bg" />
             <el-image :src="avatar" />
           </main>
@@ -56,17 +54,16 @@
         </main>
       </div>
       <portal-divider active-menu="partner" style="margin-top: 12px" />
-      <!-- <vab-footer /> -->
     </div>
     <el-backtop target="#app .scroll-wrap-partner" />
-    <!-- <vab-theme-setting /> -->
   </el-scrollbar>
 </template>
 
 <script lang="ts" setup>
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
 import portalHeader from "./components/PortalHeader.vue";
-import avatar from "@/assets/login/avatar.svg";
+import portalDivider from "./components/PortalDivider.vue";
+import avatar from "@/assets/logo.png";
 
 defineOptions({
   name: "Partner"
@@ -74,18 +71,21 @@ defineOptions({
 
 const list = reactive<any>([
   {
-    logo: avatar,
-    name: "某某科技有限公司",
+    logo: "https://wanglikai.cn/img/avatar.png",
+    name: "XX科技有限公司",
     label:
-      "致力于成为全球电力行业数字化转型的优选伙伴，随着能源转型的不断深入，新型电力系统源侧低碳化、网侧数字化、荷侧电气化的趋势已经成为行业共识，坚持平台+生态战略，把创新ICT技术、电力数字平台与行业实践经验深度结合。"
+      "汉皇重色思倾国，御宇多年求不得。杨家有女初长成，养在深闺人未识。天生丽质难自弃，一朝选在君王侧。回眸一笑百媚生，六宫粉黛无颜色。春寒赐浴华清池，温泉水滑洗凝脂。侍儿扶起娇无力，始是新承恩泽时。云鬓花颜金步摇，芙蓉帐暖度春宵。春宵苦短日高起，从此君王不早朝。承欢侍宴无闲暇，春从春游夜专夜。后宫佳丽三千人，三千宠爱在一身。"
   },
   {
-    logo: avatar,
-    name: "某某科技有限公司",
+    logo: "https://wanglikai.cn/img/avatar.png",
+    name: "XX科技有限公司",
     label:
-      "致力于为客户提供在线数据监测、数据整合、数据分析与挖掘、数据产品和智能应用以及数据化运营决策支持体系建设相关的工具、技术开发、咨询服务及企业培训。为国内众多知名企业输出高质量的数据分析服务，在业内获得广泛好评。"
+      "寻寻觅觅，冷冷清清，凄凄惨惨戚戚。乍暖还寒时候，最难将息。三杯两盏淡酒，怎敌他、晚来风急！雁过也，正伤心，却是旧时相识。满地黄花堆积，憔悴损，如今有谁堪摘？守着窗儿，独自怎生得黑？梧桐更兼细雨，到黄昏、点点滴滴。这次第，怎一个愁字了得"
   }
 ]);
+onMounted(() => {
+  document.documentElement.classList.remove("dark");
+});
 </script>
 
 <style lang="scss" scoped>
@@ -96,12 +96,6 @@ const list = reactive<any>([
 
   .partner-content {
     flex: 1;
-  }
-
-  &-mobile {
-    height: 100vh;
-    padding: var(--el-padding);
-    background: var(--el-color-white);
   }
 
   main {
@@ -117,7 +111,7 @@ const list = reactive<any>([
     position: relative;
     width: 100%;
     height: 430px;
-    background: var(--el-color-primary-light-9);
+    background: #ecf5ff;
 
     &-title {
       margin-top: 150px;
@@ -141,7 +135,7 @@ const list = reactive<any>([
       right: 30px;
       width: 192px;
       height: 192px;
-      background-image: linear-gradient(-45deg, #2e65e7 50%, #50d79a 50%);
+      background-image: linear-gradient(0deg, #2e65e7 50%, #fff 50%);
       filter: blur(40px);
       border-radius: 50%;
     }
@@ -191,27 +185,6 @@ const list = reactive<any>([
       .el-image {
         width: 55px;
         height: 55px;
-      }
-    }
-  }
-}
-
-:deep() {
-  .vab-footer {
-    margin-top: 0;
-    background: #f6f8f9;
-    border: 0;
-  }
-
-  .vab-theme-setting {
-    section {
-      > div {
-        &:nth-child(1),
-        &:nth-child(2),
-        &:nth-child(3),
-        &:nth-child(4) {
-          display: none;
-        }
       }
     }
   }
