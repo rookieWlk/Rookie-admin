@@ -1,9 +1,16 @@
 <template>
-  <header>
-    <div class="index-nav">
-      <div class="logo">
-        <a href="#/portal" />
-        <span class="logo-title">Rooike Admin</span>
+  <header
+    class="fixed top-0 right-0 left-0 z-50 flex items-center justify-center h-20 bg-opacity-80 bg-gray-100 backdrop-filter backdrop-blur-lg"
+  >
+    <div
+      class="flex items-center min-w-screen min-w-[1152px] max-w-[1366px] p-0 m-auto"
+    >
+      <div class="flex flex-1 items-center h-16 text-lg leading-16">
+        <a
+          class="inline-block w-10 h-10 mr-4 bg-center bg-no-repeat bg-cover bg-[url('@/assets/login/avatar.svg')]"
+          href="#/portal"
+        />
+        <span>Rooike Admin</span>
       </div>
 
       <el-tabs v-model="activeName" @tab-click="handleClick">
@@ -65,56 +72,10 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-header {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 70px;
-  margin: 0;
-  background: rgb(251 251 253 / 80%);
-  backdrop-filter: saturate(180%) blur(20px);
-
-  .index-nav {
-    display: flex;
-    align-items: center;
-    min-width: 1152px;
-    max-width: 1366px;
-    padding: 0;
-    margin: auto;
-
-    .logo {
-      display: flex;
-      flex: 1;
-      align-items: center;
-      height: 70px;
-      font-size: 20px;
-      line-height: 70px;
-
-      a {
-        display: inline-block;
-        width: 40px;
-        height: 40px;
-        margin-right: 15px;
-        background: url("@/assets/login/avatar.svg") center center no-repeat;
-        background-size: 100% 100%;
-      }
-
-      span {
-        margin-right: 40px;
-      }
-    }
-
-    :deep() {
-      .el-tabs {
-        &__header {
-          margin: 0;
-        }
-      }
+:deep() {
+  .el-tabs {
+    &__header {
+      margin: 0;
     }
   }
 }

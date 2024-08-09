@@ -10,25 +10,24 @@
           </div>
 
           <el-button
-            href="https://vue-admin-beautiful.com/authorization/shop-vite.html"
+            href="https://github.com/rookieWlk"
             rel="noopener noreferrer"
             tag="a"
             target="_blank"
             type="primary"
           >
-            立即购买
+            查看源码
           </el-button>
           <el-button
-            href="https://vue-admin-beautiful.com/shop-vite"
+            href="https://github.com/rookieWlk"
             plain
             rel="noopener noreferrer"
             tag="a"
             target="_blank"
             type="primary"
           >
-            进入产品
+            产品演示
           </el-button>
-
           <div class="image-bg" />
           <el-image :src="logo" />
         </main>
@@ -68,7 +67,6 @@
                       全生命周期客户管理
                     </div>
                   </div>
-                  <!-- <vab-icon icon="shopping-bag-line" /> -->
                 </div>
               </el-col>
               <el-col :span="8">
@@ -79,7 +77,6 @@
                       打造全域营销运营闭环
                     </div>
                   </div>
-                  <!-- <vab-icon icon="archive-drawer-line" /> -->
                 </div>
               </el-col>
               <el-col :span="8">
@@ -90,7 +87,6 @@
                       沉淀私域消费者数据资产
                     </div>
                   </div>
-                  <!-- <vab-icon icon="briefcase-5-line" /> -->
                 </div>
               </el-col>
               <el-col :span="8">
@@ -101,7 +97,6 @@
                       深度洞察企业客户需求
                     </div>
                   </div>
-                  <!-- <vab-icon icon="code-s-slash-line" /> -->
                 </div>
               </el-col>
               <el-col :span="8">
@@ -112,7 +107,6 @@
                       用户精准营销与智能触达通路
                     </div>
                   </div>
-                  <!-- <vab-icon icon="computer-line" /> -->
                 </div>
               </el-col>
               <el-col :span="8">
@@ -123,7 +117,6 @@
                       构建专属消费者大数据画像
                     </div>
                   </div>
-                  <!-- <vab-icon icon="home-office-line" /> -->
                 </div>
               </el-col>
             </el-row>
@@ -131,36 +124,32 @@
         </div>
         <portal-divider active-menu="product" />
       </main>
-
-      <!-- <vab-footer /> -->
     </div>
     <el-backtop target="#app .scroll-wrap-product" />
-    <!-- <vab-theme-setting /> -->
   </el-scrollbar>
 </template>
 
 <script lang="ts" setup>
+import { onMounted } from "vue";
 import portalHeader from "./components/PortalHeader.vue";
-import logo from "@/assets/login/avatar.svg";
+import portalDivider from "./components/PortalDivider.vue";
+import logo from "@/assets/logo.png";
 
 defineOptions({
   name: "Product"
+});
+onMounted(() => {
+  document.documentElement.classList.remove("dark");
 });
 </script>
 
 <style lang="scss" scoped>
 .product-main {
-  &-mobile {
-    height: 100vh;
-    padding: var(--el-padding);
-    background: var(--el-color-white);
-  }
-
   .banner {
     position: relative;
     width: 100%;
     height: 480px;
-    background: var(--el-color-primary-light-9);
+    background: #ecf5ff;
 
     &-title {
       margin-top: 150px;
@@ -184,7 +173,7 @@ defineOptions({
       right: 30px;
       width: 192px;
       height: 192px;
-      background-image: linear-gradient(-45deg, #bd34fe 50%, #47caff 50%);
+      background-image: linear-gradient(0deg, #2e65e7 50%, #fff 50%);
       filter: blur(40px);
       border-radius: 50%;
     }
@@ -315,27 +304,6 @@ defineOptions({
           margin-right: 20px;
           font-size: 50px;
           color: var(--el-color-primary);
-        }
-      }
-    }
-  }
-}
-
-:deep() {
-  .vab-footer {
-    margin-top: 0;
-    background: #f6f8f9;
-    border: 0;
-  }
-
-  .vab-theme-setting {
-    section {
-      > div {
-        &:nth-child(1),
-        &:nth-child(2),
-        &:nth-child(3),
-        &:nth-child(4) {
-          display: none;
         }
       }
     }

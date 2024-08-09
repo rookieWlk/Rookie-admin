@@ -1,5 +1,5 @@
 <template>
-  <div class="portal-divider">
+  <div class="flex items-center justify-center">
     <el-link :class="activeMenu === 'portal' ? 'active' : ''" to="/portal"
       >主页</el-link
     >
@@ -29,19 +29,3 @@ defineProps({
   }
 });
 </script>
-
-<style lang="scss" scoped>
-.portal-divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  a {
-    color: var(--el-color-grey);
-
-    &.active {
-      color: var(--el-color-primary);
-    }
-  }
-}
-</style>
