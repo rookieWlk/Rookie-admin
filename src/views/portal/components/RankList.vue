@@ -54,7 +54,6 @@ const iconList = ref<any>([
 <style lang="scss" scoped>
 .medal-list {
   &-item {
-
     $position: (
       1: -5px -122px,
       2: -64px -83px,
