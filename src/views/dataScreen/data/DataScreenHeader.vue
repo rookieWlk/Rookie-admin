@@ -67,13 +67,6 @@ const router = useRouter();
     background: #395dfe;
     border-radius: 50%;
     box-shadow: 0 2px 12px 0 #395dfe;
-
-    // :deep() {
-    //   [class*="ri-"] {
-    //     font-size: 20px;
-    //     color: #fff;
-    //   }
-    // }
   }
 
   span {
