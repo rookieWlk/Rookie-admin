@@ -67,6 +67,8 @@ menus:
   pureEmpty: Empty Page
   dataScreen: Data Screen
   portal: Portal
+  goods: Goods
+  goodsList: Goods List
   pureTable: Table
   pureSysManagement: System Manage
   pureUser: User Manage
