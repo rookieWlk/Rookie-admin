@@ -1,6 +1,6 @@
 // 模拟后端动态生成路由
 import { defineFakeRoute } from "vite-plugin-fake-server/client";
-import { system, monitor } from "@/router/enums";
+import { system, monitor, goods } from "@/router/enums";
 
 /**
  * roles：页面级别权限，这里模拟二种 "admin"、"common"
@@ -152,6 +152,45 @@ const portalRouter = {
       meta: {
         title: "menus.portal"
       }
+    },
+    {
+      // path随便写，但前面必须有个 `/`
+      path: "/portal",
+      // component对应的值前不需要加 / 值对应的是实际业务 `.vue` 或 `.tsx` 代码路径
+      component: "portal/index.vue",
+      name: "portal",
+      meta: {
+        title: "menus.portal"
+      }
+    }
+  ]
+};
+// 商品管理
+const goodsRouter = {
+  path: "/goods",
+  meta: {
+    icon: "ep:handbag",
+    title: "menus.goods",
+    rank: goods
+  },
+  children: [
+    {
+      path: "/goods/GoodsManagement",
+      component: "goods/GoodsManagement",
+      name: "GoodsManagement",
+      meta: {
+        title: "menus.goods",
+        roles: ["admin"]
+      }
+    },
+    {
+      path: "/goods/GoodsList",
+      component: "goods/GoodsList",
+      name: "GoodsList",
+      meta: {
+        title: "menus.goodsList",
+        roles: ["admin"]
+      }
     }
   ]
 };
@@ -167,7 +206,8 @@ export default defineFakeRoute([
           systemManagementRouter,
           systemMonitorRouter,
           dataScreenRouter,
-          portalRouter
+          portalRouter,
+          goodsRouter
         ]
       };
     }
