@@ -152,16 +152,6 @@ const portalRouter = {
       meta: {
         title: "menus.portal"
       }
-    },
-    {
-      // path随便写，但前面必须有个 `/`
-      path: "/portal",
-      // component对应的值前不需要加 / 值对应的是实际业务 `.vue` 或 `.tsx` 代码路径
-      component: "portal/index.vue",
-      name: "portal",
-      meta: {
-        title: "menus.portal"
-      }
     }
   ]
 };
@@ -169,25 +159,27 @@ const portalRouter = {
 const goodsRouter = {
   path: "/goods",
   meta: {
-    icon: "ep:handbag",
+    icon: "ep:box",
     title: "menus.goods",
     rank: goods
   },
   children: [
     {
       path: "/goods/GoodsManagement",
-      component: "goods/GoodsManagement",
+      component: "goods/GoodsManagement/index",
       name: "GoodsManagement",
       meta: {
+        icon: "ep:goods",
         title: "menus.goods",
         roles: ["admin"]
       }
     },
     {
       path: "/goods/GoodsList",
-      component: "goods/GoodsList",
+      component: "goods/GoodsList/index",
       name: "GoodsList",
       meta: {
+        icon: "ep:tickets",
         title: "menus.goodsList",
         roles: ["admin"]
       }
