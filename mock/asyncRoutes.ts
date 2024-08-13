@@ -194,6 +194,37 @@ const goodsRouter = {
     }
   ]
 };
+// 商品管理
+const goodsRouter = {
+  path: "/goods",
+  meta: {
+    icon: "ep:box",
+    title: "menus.goods",
+    rank: goods
+  },
+  children: [
+    {
+      path: "/goods/GoodsManagement",
+      component: "goods/GoodsManagement/index",
+      name: "GoodsManagement",
+      meta: {
+        icon: "ep:goods",
+        title: "menus.goods",
+        roles: ["admin"]
+      }
+    },
+    {
+      path: "/goods/GoodsList",
+      component: "goods/GoodsList/index",
+      name: "GoodsList",
+      meta: {
+        icon: "ep:tickets",
+        title: "menus.goodsList",
+        roles: ["admin"]
+      }
+    }
+  ]
+};
 
 export default defineFakeRoute([
   {
