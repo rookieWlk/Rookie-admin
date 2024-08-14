@@ -293,7 +293,6 @@ const ruleForm = reactive({
 });
 
 const onLogin = async (formEl: FormInstance | undefined) => {
-  console.log("当前环境变量VITE_PUBLIC_PATH为：", VITE_PUBLIC_PATH);
   if (!formEl) return;
   await formEl.validate(valid => {
     if (valid) {

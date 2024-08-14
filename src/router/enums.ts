@@ -3,6 +3,7 @@
 const home = 0, // 平台规定只有 home 路由的 rank 才能为 0 ，所以后端在返回 rank 的时候需要从非 0 开始
   system = 1,
   monitor = 2,
-  goods = 3;
+  goods = 3,
+  error = 4;
 
-export { home, system, monitor, goods };
+export { home, system, monitor, goods, error };
